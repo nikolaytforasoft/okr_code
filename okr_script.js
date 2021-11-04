@@ -51,10 +51,9 @@ function generate_key_results_block(key_results, position_number) {
 
   let key_results_block = document.createElement('div');
   key_results_block.classList.add('key_result_block');
-  key_results_block.classList.add('active');
+  // key_results_block.classList.add('active');
 
   for (let key_result of key_results) {
-    console.log(key_result);
     let temp_node = document.createElement('div');
     temp_node.innerHTML = key_result_template;
     let key_result_element = temp_node.firstElementChild;
@@ -74,6 +73,8 @@ function generate_key_results_block(key_results, position_number) {
   key_results_block.style.setProperty('grid-column-start', position_number);
   key_results_block.style.setProperty('grid-row-start', 2);
 
+  key_results_block.dataset.position = position_number;
+
   return key_results_block;
 }
 
@@ -89,10 +90,36 @@ function render_okr(wrapper_element, okr, position_number) {
   okr_block.style.setProperty('grid-column-start', position_number);
   okr_block.style.setProperty('grid-row-start', 1);
 
+  okr_block.querySelector('.expand_toggle').dataset.position = position_number;
+
   wrapper_element.appendChild(okr_block);
 
   wrapper_element.appendChild(generate_key_results_block(okr.key_results, position_number));
 
+}
+
+function catch_toggle_click(wrapper_element) {
+  let toggles = wrapper_element.getElementsByClassName('expand_toggle');
+
+  for (let toggle of toggles) {
+    toggle.addEventListener('click', function (event){
+      let okr_block = event.target.closest('.okr_block');
+      let current_element = event.target.closest('.expand_toggle');
+
+      let position = current_element.dataset.position;
+      let key_result_block = wrapper_element.querySelector(`.key_result_block[data-position='${position}']`);
+
+      if (okr_block.classList.contains('active')) {
+        okr_block.classList.remove('active');
+        key_result_block.classList.remove('active');
+      } else {
+        okr_block.classList.add('active');
+        key_result_block.classList.add('active');
+
+      }
+
+    });
+  }
 }
 
 function renderData(data) {
@@ -106,7 +133,12 @@ function renderData(data) {
         position_number++;
 
         render_okr(wrapper, okr, position_number)
+
       }
+
+      catch_toggle_click(wrapper);
   }
 
 }
+
+
