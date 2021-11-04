@@ -1,32 +1,3 @@
-// Import the functions you need from the SDKs you need
-    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    import {
-      getDatabase,
-      ref,
-      query,
-      limitToLast,
-      get,
-      child
-    } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyBO6dktf2olMYc0sPsQajiunghxpeBz3Yw",
-      authDomain: "okr-results.firebaseapp.com",
-      databaseURL: "https://okr-results-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "okr-results",
-      storageBucket: "okr-results.appspot.com",
-      messagingSenderId: "431462395894",
-      appId: "1:431462395894:web:f4b67ccc43f404fc3a61d7"
-    };
-
-    // Initialize Firebase
-    initializeApp(firebaseConfig);
-
-
 const okr_block_template = '' +
   '        <div class="objective">\n' +
   '          <div class="expand_toggle_wrapper">\n' +
@@ -139,25 +110,3 @@ function renderData(data) {
   }
 
 }
-
-document.addEventListener("DOMContentLoaded", function(event) {
-
-  let dbRef = ref(getDatabase());
-  let okr_query = query(child(dbRef, 'OKR'), limitToLast(1));
-
-  get(okr_query).then((snapshot) => {
-    if (snapshot.exists()) {
-
-      let data = snapshot.val();
-      data = data[Object.keys(data)[0]];
-
-      renderData(data)
-
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-
-});
