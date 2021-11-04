@@ -78,24 +78,27 @@ function generate_key_results_block(key_results, position_number) {
   return key_results_block;
 }
 
-function render_okr(wrapper_element, okr, position_number) {
-  let okr_block = document.createElement('div');
-  okr_block.classList.add('okr_block');
-  okr_block.innerHTML = okr_block_template;
+function render_okr(wrapper_element, okr, position_number, department) {
+  if (department == 'MAIN') {
+    let okr_block = document.createElement('div');
+    okr_block.classList.add('okr_block');
+    okr_block.innerHTML = okr_block_template;
 
-  okr_block.querySelector('.objective_text').innerText = okr.text;
-  let progress = Math.round(okr.progress * 100) + '%';
-  okr_block.querySelector('.progress_percent').innerText = progress;
-  okr_block.querySelector('.progressbar').style.setProperty('--progress_variable', progress);
-  okr_block.style.setProperty('grid-column-start', position_number);
-  okr_block.style.setProperty('grid-row-start', 1);
+    okr_block.querySelector('.objective_text').innerText = okr.text;
+    let progress = Math.round(okr.progress * 100) + '%';
+    okr_block.querySelector('.progress_percent').innerText = progress;
+    okr_block.querySelector('.progressbar').style.setProperty('--progress_variable', progress);
+    okr_block.style.setProperty('grid-column-start', position_number);
+    okr_block.style.setProperty('grid-row-start', 1);
 
-  okr_block.querySelector('.expand_toggle').dataset.position = position_number;
+    okr_block.querySelector('.expand_toggle').dataset.position = position_number;
 
-  wrapper_element.appendChild(okr_block);
+    wrapper_element.appendChild(okr_block);
 
-  wrapper_element.appendChild(generate_key_results_block(okr.key_results, position_number));
+    wrapper_element.appendChild(generate_key_results_block(okr.key_results, position_number));
+  } else {
 
+  }
 }
 
 function catch_toggle_click(wrapper_element) {
@@ -122,7 +125,7 @@ function catch_toggle_click(wrapper_element) {
   }
 }
 
-function renderData(data) {
+function render_data(data) {
   let wrappers = document.getElementsByClassName('okrs_wrapper');
 
   for (let wrapper of wrappers) {
@@ -132,7 +135,7 @@ function renderData(data) {
       for (let okr of data[department]['objectives']) {
         position_number++;
 
-        render_okr(wrapper, okr, position_number)
+        render_okr(wrapper, okr, position_number, department)
 
       }
 
