@@ -23,7 +23,7 @@ const okr_block_template = '' +
 const key_result_template = '' +
   '      <div class="key_result">\n' +
   '        <div class="key_result_text">\n' +
-  '          <div class="icon">\n' +
+  '          <div class="key_result_icon">\n' +
   '            <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
   '              <circle cx="2" cy="2" r="2" fill="#42526E"/>\n' +
   '            </svg>\n' +
@@ -65,7 +65,7 @@ function generate_key_results_block(key_results, position_number) {
 
     if (progress == '100%') {
       key_result_element.classList.add('done');
-      key_result_element.querySelector('.icon').innerHTML = done_key_result_icon;
+      key_result_element.querySelector('.key_result_icon').innerHTML = done_key_result_icon;
     }
     key_results_block.appendChild(key_result_element);
   }
@@ -137,8 +137,11 @@ function renderData(data) {
       }
 
       catch_toggle_click(wrapper);
-      //for wiki, to not to cut the shadows 
-      wrapper.closest('.innerCell').style.setProperty('overflow-x', 'visible');
+      //for wiki, to not to cut the shadows
+      let inner_cell_block = wrapper.closest('.innerCell');
+      if (inner_cell_block) {
+        inner_cell_block.style.setProperty('overflow-x', 'visible');
+      }
 
   }
 
