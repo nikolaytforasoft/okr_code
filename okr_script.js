@@ -137,6 +137,9 @@ function renderData(data) {
       }
 
       catch_toggle_click(wrapper);
+      //for wiki, to not to cut the shadows 
+      wrapper.closest('.innerCell').style.setProperty('overflow-x', 'visible');
+
   }
 
 }
