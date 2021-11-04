@@ -1,4 +1,4 @@
-.wrapper, .okrs_wrapper {
+.wrapper, .main_okr_wrapper {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
