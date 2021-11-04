@@ -1,0 +1,252 @@
+.wrapper, .okrs_wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 30px;
+}
+
+.key_result_block {
+  display: none;
+  position: relative;
+  /*height: 300px;*/
+  background: #FFFFFF;
+  box-shadow: 0px 20px 40px -8px rgba(48, 70, 129, 0.2);
+  border-radius: 0 0 16px 16px;
+  z-index: 999;
+  border-top:1px solid rgba(96, 109, 131, 0.1);
+  padding: 24px 16px 34px 16px;
+}
+
+.key_result_block.active {
+  display: block;
+}
+
+.key_result_block:before {
+  background-color: #fff;
+  height: 20px;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:-21px;
+}
+
+.key1{
+  grid-column-start: 1;
+}
+
+.key2 {
+  grid-column-start: 2;
+}
+
+.key3 {
+  grid-column-start: 3;
+}
+
+.key_result {
+  margin-top: 26px;
+}
+
+.key_result:first-child{
+  margin-top: 0;
+}
+
+.key_result_text {
+  display: flex;
+}
+
+.key_result_text > .icon {
+  flex: 1;
+  text-align: center;
+}
+
+.key_result_text > .text {
+  flex: 9;
+  text-align: left;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #42526E;
+}
+
+.key_result.done > .key_result_text > .text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #979EAA;
+}
+
+.key_result_progressbar_section {
+  display: flex;
+  margin-top: 14px;
+}
+
+.key_result_progressbar_section > .dummy_block {
+  flex: 1;
+}
+
+.key_result_progressbar_section > .key_result_progressbar {
+  flex: 9;
+}
+
+.key_result_progressbar > .progressbar {
+  --progress_variable: 0%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 10px;
+  background: rgba(96, 109, 131, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 9;
+}
+
+.key_result_progressbar > .progressbar:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: var(--progress_variable);
+  height: 100%;
+  background: #136AFB;
+  border-radius: 12px;
+}
+
+.key_result_progressbar > .progress_percent {
+  margin-left: 16px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: right;
+  color: #172B4D;
+  flex: 1;
+}
+
+.okr_block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFFFF;
+  box-shadow: 0px 20px 40px -8px rgba(48, 70, 129, 0.2);
+  border-radius: 16px;
+  padding: 16px 16px 28px 16px;
+}
+
+.okr_block.active {
+  /*box-shadow: none;*/
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.okr_block.active > .objective > .expand_toggle_wrapper > .expand_toggle {
+  transform: rotate(90deg);
+}
+
+.okr_block:first-child {
+  margin-left: 0;
+}
+
+.okr_block:last-child {
+  margin-right: 0;
+}
+
+.objective {
+  display: flex;
+  margin-bottom: 16px;
+  /*margin: 16px 16px 16px 0;*/
+}
+
+.objective_text {
+  flex: 9;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+
+  /* Black */
+  color: #172B4D;
+}
+
+.expand_toggle_wrapper {
+  flex: 1;
+}
+
+.expand_toggle {
+  /*margin: 0 auto;*/
+  width: 26px;
+  height: 26px;
+  background: rgba(96, 109, 131, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expand_toggle:hover {
+  background: rgba(96, 109, 131, 0.2);
+  cursor: pointer;
+}
+
+.expand_toggle > svg {
+  vertical-align: center;
+}
+
+.progressbar_section {
+  display: flex;
+  /*margin-right: 16px;*/
+}
+
+.progressbar_section > .dummy_block {
+  flex: 1;
+}
+
+.progressbar_section > .progressbar_wrapper {
+  flex: 9;
+}
+
+.progressbar_wrapper, .key_result_progressbar {
+  display: flex;
+  align-items: center;
+}
+
+.progressbar_wrapper > .progress_percent {
+
+  flex: 2;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  color: #172B4D;
+}
+
+
+.progressbar_wrapper > .progressbar {
+  --progress_variable: 50%;
+  flex: 10;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 14px;
+  background: rgba(96, 109, 131, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.progressbar_wrapper > .progressbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: var(--progress_variable);
+  height: 100%;
+  background: #136AFB;
+  border-radius: 12px;
+}
