@@ -1,10 +1,14 @@
 //for list OKRs ---------------------------------------------
 function generate_objective(text, progress) {
   let objective = document.createElement('p');
-
   objective.style.margin = "10px 0 0 ";
+  progress = Math.round(progress * 100);
 
-  objective.innerHTML = '<strong>' + '(' + Math.round(progress * 100) + '%' + ')' + ' ' + text + '</strong>';
+  objective.innerHTML = '<strong>' + '(' + progress + '%' + ')' + ' ' + text + '</strong>';
+
+  if (progress == 100) {
+    objective.style.setProperty('text-decoration', 'line-through');
+  }
 
   return objective
 }
@@ -14,9 +18,14 @@ function generate_key_results(key_results) {
 
   for (k of key_results) {
     let key_result = document.createElement('li');
-    key_result.classList.add('key_result');
+    let progress = Math.round(k.progress * 100);
 
-    key_result.innerText = '(' + Math.round(k.progress * 100) + '%' + ')' + ' ' + k.text;
+    key_result.innerText = '(' + progress + '%' + ')' + ' ' + k.text;
+
+    if (progress == 100) {
+      key_result.style.setProperty('text-decoration', 'line-through');
+    }
+
 
     key_results_wrapper.appendChild(key_result)
   }
