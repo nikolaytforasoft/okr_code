@@ -1,3 +1,43 @@
+//for list OKRs ---------------------------------------------
+function generate_objective(text, progress) {
+  let objective = document.createElement('p');
+
+  objective.style.margin = "10px 0 0 ";
+
+  objective.innerHTML = '<strong>' + '(' + Math.round(progress * 100) + '%' + ')' + ' ' + text + '</strong>';
+
+  return objective
+}
+
+function generate_key_results(key_results) {
+  let key_results_wrapper = document.createElement('ul');
+
+  for (k of key_results) {
+    let key_result = document.createElement('li');
+    key_result.classList.add('key_result');
+
+    key_result.innerText = '(' + Math.round(k.progress * 100) + '%' + ')' + ' ' + k.text;
+
+    key_results_wrapper.appendChild(key_result)
+  }
+
+  return key_results_wrapper;
+}
+
+function generate_okr(objective) {
+  let okr = document.createElement('div');
+
+  let o = generate_objective(objective.text, objective.progress);
+  let kr = generate_key_results(objective.key_results);
+
+  okr.appendChild(o);
+  okr.appendChild(kr);
+
+  return okr;
+}
+//-------------------------------------------------------------------
+
+
 const okr_block_template = '' +
   '        <div class="objective">\n' +
   '          <div class="expand_toggle_wrapper">\n' +
@@ -79,8 +119,11 @@ function generate_key_results_block(key_results, position_number) {
 }
 
 function render_okr(wrapper_element, okr, position_number, department) {
+
+  let okr_block;
+
   if (department == 'MAIN') {
-    let okr_block = document.createElement('div');
+    okr_block = document.createElement('div');
     okr_block.classList.add('okr_block');
     okr_block.innerHTML = okr_block_template;
 
@@ -93,12 +136,12 @@ function render_okr(wrapper_element, okr, position_number, department) {
 
     okr_block.querySelector('.expand_toggle').dataset.position = position_number;
 
-    wrapper_element.appendChild(okr_block);
-
     wrapper_element.appendChild(generate_key_results_block(okr.key_results, position_number));
   } else {
-
+    okr_block = generate_okr(okr);
   }
+
+  wrapper_element.appendChild(okr_block);
 }
 
 function catch_toggle_click(wrapper_element) {
