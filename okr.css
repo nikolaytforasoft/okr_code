@@ -176,6 +176,7 @@
 
 .expand_toggle_wrapper {
   flex: 1;
+  margin-right: 6px;
 }
 
 .expand_toggle {
